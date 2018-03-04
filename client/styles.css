@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.container {
+    width:100% !important;
+    max-width:100% !important;
+    padding:0px;
+}
+body {
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+}
+
+.navbar-toggler {
+  border:none;
+  outline:none;
+}
+
+.navbar-toggler:focus {
+  outline:none;
+}
+
+.blue-beauty {
+  background-color: rgb(93,151,172);
+}
+
+.underline {
+  cursor:pointer;
+  display:inline-block;
+  text-decoration:underline;
+}
+
+.input-group-prepend {
+  background-color:rgb(165,132,73);
+  padding:7px;
+  width:35px;
+  text-align:center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.card-header {
+  background-color:rgb(165,132,73);
+}
+
+.btn-primary:enabled {
+  cursor:pointer;
+}
+
+.card {
+  width:75%;
+  margin:auto;
+  min-width:400px;
+  border-radius:10px;
+}
+
+.card-header {
+  border-top-left-radius:10px !important;
+  border-top-right-radius:10px !important;
+}

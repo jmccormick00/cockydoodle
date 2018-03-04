@@ -1,0 +1,41 @@
+.card-holder {
+    text-align:center;
+    width:100%;
+}
+
+.blue-beauty {
+    background-color:rgb(92,29,25);
+}
+
+.nav-link img {
+    height:45px;
+}
+
+.navbar {
+    /*padding:0px;*/
+}
+
+.right-align {
+    text-align:right;
+    width:75%;
+    line-height:45px;
+}
+.nav-item {
+    display:inline-block;
+    float:right;
+}
+
+@media (min-width: 992px) {
+    navbar {
+        padding:10px !important;
+    }
+}
+
+.mr-auto {
+    width:100%;
+}
+
+.welcome {
+    color:white;
+    font-size:20px;
+}

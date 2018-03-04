@@ -1,0 +1,32 @@
+<div class="start" [style.background-color]="getStyle()" *ngIf="!auth.loggedIn">
+
+  <div *ngIf="darkRed" class="big-logo">
+    <img src="../assets/biglogo.png">
+  </div>
+  <div *ngIf="!darkRed" class="rooster-logo">
+    <img src="../assets/fav.png">
+  </div>
+  
+  <div *ngIf="!showLogin && !showRegister">
+    <div class="info-text">
+      Rewarding Accurate Predictions
+    </div>
+    <div class="auth-btns">
+      <div class="auth-btn" ng-init="showRegister = false" (click)="showRegister = true; darkRed = false">Sign-Up</div>
+      or
+      <div class="auth-btn" ng-init="showLogin = false" (click)="showLogin = true; darkRed = false">Log In</div>
+    </div>
+
+    <div class="info-text small-text">
+      Current Event
+    </div>
+    <div class="info-text small-text">
+      2018 College Basketball Challenge
+    </div>
+  </div>
+
+  <app-login *ngIf="showLogin"></app-login>
+
+  <app-register *ngIf="showRegister"></app-register>
+
+</div>

@@ -1,0 +1,24 @@
+.card {
+    background-color:rgb(98,28,24);
+    color:white;
+    margin-bottom:20px;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: rgb(165,132,73);
+    border-color: rgb(165,132,73);
+}
+
+.btn-primary.enabled, .btn-primary:enabled {
+    color: #fff;
+    background-color: rgb(175,132,73);
+    border-color: rgb(175,132,73);
+}
+
+.btn-primary:focus {
+    color: #fff;
+    background-color: rgb(175,152,73);
+    border-color: rgb(175,152,73);
+    box-shadow:none;
+}
