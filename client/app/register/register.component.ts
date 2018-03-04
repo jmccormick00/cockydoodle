@@ -10,8 +10,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
-  providers: [ UserService ]
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
