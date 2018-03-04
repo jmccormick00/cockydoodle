@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv';
-
 import * as async from 'async';
 
 import Bet from '../models/bet';
@@ -14,14 +13,12 @@ export default class BetCtrl extends BaseCtrl {
         const obj = new this.model(req.body);
         const amount = (obj.homeAmount > obj.awayAmount) ? obj.homeAmount : obj.awayAmount;
         async.series([
-            obj.save((err, item) => {
-                // 11000 is the code for duplicate key error
-                if (err && err.code === 11000) {res.sendStatus(400); }
-                if (err) { return console.error(err); }
-            }),
+            function save() {
+                obj.save(function(err) {});
+            },
             User.findOneAndUpdate({userId: obj.userId }, {$inc: {wallet: -amount}}, {}),
             // Game.findOneAndUpdate({gameId: obj.gameId}), TODO FIX
-        ], function waterFallCallback(err) {
+        ], function (err) {
             if (err) {return console.error(err); }
             res.status(200);
         });
