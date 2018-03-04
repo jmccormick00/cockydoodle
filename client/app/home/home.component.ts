@@ -12,12 +12,9 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  cards = [{"name": 'Ticker', "currency": 'BTC/USD'}, {"name": 'Marketcap', "currency": 'n/a'}, {"name": 'Energy Consumption', "currency": 'Bitcoin'}, {"name": 'Mempool', "currency": 'BTC'}, {"name": 'Jokes', "currency": 'Bitcoin'}, {"name": 'Portfolio', "currency": 'n/a'}, {"name": 'Transaction Fees', "currency": 'Bitcoin'}];
-
   constructor(public auth: AuthService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log(this.auth.currentUser);
   }
 
 }

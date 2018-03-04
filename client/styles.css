@@ -61,3 +61,114 @@ body {
   border-top-left-radius:10px !important;
   border-top-right-radius:10px !important;
 }
+
+.nav-linkz img {
+    height:55px;
+    cursor:pointer;
+}
+
+.blue-beauty {
+    background-color:rgb(92,29,25);
+}
+
+.nav-linkz {
+    cursor:pointer;
+}
+
+.logo {
+    display:inline-block;
+    margin-top:5px;
+}
+
+.navbar {
+    /*padding:0px;*/
+}
+
+.right-align {
+    text-align:right;
+    width:75%;
+    line-height:45px;
+}
+.nav-item {
+    display:inline-block;
+    float:right;
+}
+
+@media (min-width: 992px) {
+    navbar {
+        padding:10px !important;
+    }
+}
+
+.hunnid {
+    width:100%;
+}
+
+.mr-auto {
+    width:100%;
+}
+
+.welcome {
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.account-detail {
+    float:right;
+    cursor:pointer;
+    line-height:45px;
+}
+
+.below {
+    display:block;
+    color:rgb(165,132,73) !important;
+    line-height:0px;
+    height:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.sub-nav {
+    text-align:left;
+    background-color:rgb(165,132,73);
+    margin-top:5px;
+    padding:2px;
+}
+
+.sub-item {
+    display:inline-block;
+    color:rgb(231,230,230);
+    padding-left:5vw;
+    cursor:pointer;
+}
+
+.sub-item a {
+    text-decoration:none;
+    color:inherit;
+}
+
+.active {
+    text-decoration:underline;
+    cursor:auto;
+}
+
+
+.image_full{
+   display:block;
+  }
+
+ .image_mobile{
+  display:none;
+ }
+
+@media (max-width: 650px){
+  .image_full{
+   display:none;
+  }
+
+  .image_mobile{
+   display:block;
+  }
+}

@@ -7,8 +7,18 @@
     background-color:rgb(92,29,25);
 }
 
-.nav-link img {
-    height:45px;
+.nav-linkz img {
+    height:55px;
+    cursor:pointer;
+}
+
+.nav-linkz {
+    cursor:pointer;
+}
+
+.logo {
+    display:inline-block;
+    margin-top:5px;
 }
 
 .navbar {
@@ -31,11 +41,95 @@
     }
 }
 
+.hunnid {
+    width:100%;
+}
+
 .mr-auto {
     width:100%;
 }
 
 .welcome {
     color:white;
-    font-size:20px;
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.account-detail {
+    float:right;
+    cursor:pointer;
+    line-height:45px;
+}
+
+.below {
+    display:block;
+    color:rgb(165,132,73) !important;
+    line-height:0px;
+    height:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.sub-nav {
+    text-align:left;
+    background-color:rgb(165,132,73);
+    margin-top:5px;
+    padding:2px;
+}
+
+.sub-item {
+    display:inline-block;
+    color:rgb(231,230,230);
+    padding-left:5vw;
+    cursor:pointer;
+}
+
+.sub-item a {
+    text-decoration:none;
+    color:inherit;
+}
+
+.active {
+    text-decoration:underline;
+    cursor:auto;
+}
+
+
+.image_full{
+   display:block;
+  }
+
+ .image_mobile{
+  display:none;
+ }
+
+@media (max-width: 650px){
+  .image_full{
+   display:none;
+  }
+
+  .image_mobile{
+   display:block;
+  }
+}
+
+.coming-soon {
+    width:100%;
+}
+
+.coming-soon img {
+    width:100%;
+    filter: blur(7px);
+}
+
+.soon-text {
+    color:rgb(165,132,73);
+    font-size:30px;
+    font-weight:bold;
+    position:absolute;
+    z-index:100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

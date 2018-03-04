@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.registerForm.value).subscribe(
       res => {
         this.toast.setMessage('you successfully registered!', 'success');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       },
       error => this.toast.setMessage('email already exists', 'danger')
     );
