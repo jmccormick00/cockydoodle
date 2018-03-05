@@ -14,11 +14,14 @@ import { ToastComponent } from '../shared/toast/toast.component';
 })
 export class RegisterComponent implements OnInit {
 
+  emailReg: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   registerForm: FormGroup;
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(100)
+    Validators.maxLength(100),
+    Validators.pattern(this.emailReg)
   ]);
   referralEmail = new FormControl('', [
     Validators.minLength(3),
