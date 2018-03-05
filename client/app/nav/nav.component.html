@@ -8,7 +8,7 @@
     </div>
     <div class="account-detail" *ngIf="auth.loggedIn">
       <div class="welcome">
-        Welcome, {{auth.currentUser.username}} <i class="fa fa-user"></i>
+        Welcome, {{auth.currentUser.name}} <i class="fa fa-user"></i>
       </div>
       <div class="below">
         Balance: {{auth.currentUser.wallet}} tokens

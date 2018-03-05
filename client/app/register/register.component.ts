@@ -32,6 +32,11 @@ export class RegisterComponent implements OnInit {
     Validators.minLength(3),
     Validators.maxLength(50)
   ]);
+  username = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(50)
+  ]);
   country = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
@@ -53,6 +58,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       name: this.name,
+      username: this.username,
       email: this.email,
       country: this.country,
       password: this.password,
@@ -61,9 +67,11 @@ export class RegisterComponent implements OnInit {
   }
 
   setClassUsername() {
+    return { 'has-danger': !this.username.pristine && !this.username.valid };
+  }
+  setClassName() {
     return { 'has-danger': !this.name.pristine && !this.name.valid };
   }
-
   setClassEmail() {
     return { 'has-danger': !this.email.pristine && !this.email.valid };
   }
