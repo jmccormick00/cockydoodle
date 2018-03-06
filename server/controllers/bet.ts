@@ -17,7 +17,8 @@ export default class BetCtrl extends BaseCtrl {
                 obj.save(function(err) {});
             },
             User.findOneAndUpdate({userId: obj.userId }, {$inc: {wallet: -amount}}, {}),
-            // Game.findOneAndUpdate({gameId: obj.gameId}), TODO FIX
+            function updateGame() { // Game.findOneAndUpdate({gameId: obj.gameId}), TODO FIX - change the popularity and pots
+            }
         ], function (err) {
             if (err) {return console.error(err); }
             res.status(200);
