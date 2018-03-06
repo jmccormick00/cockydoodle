@@ -1,0 +1,37 @@
+.rules-title {
+    background-color:rgb(165,132,73);
+    margin:20px;
+    border:1px solid rgb(92,29,25);
+    color:rgb(92,29,25);
+    height:60px;
+    font-size:32px;
+    padding:5px;
+    font-weight:bold;
+}
+
+.rules {
+    color:rgb(107,50,46);
+    margin-top:20px;
+    margin-right:45px;
+    margin-left:20px;
+}
+
+@media (max-width: 650px){
+    .rules-title {
+        font-size:5vw;
+        height:11vw;
+    }
+}
+
+.spacer {
+    height:10px;
+}
+
+.bold {
+    font-weight:bold;
+    display:inline-block;
+}
+
+.example {
+    width:100vw;
+}

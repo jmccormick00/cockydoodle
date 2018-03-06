@@ -14,17 +14,25 @@ import { ToastComponent } from '../shared/toast/toast.component';
 })
 export class RegisterComponent implements OnInit {
 
+  emailReg: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   registerForm: FormGroup;
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(100)
+    Validators.maxLength(100),
+    Validators.pattern(this.emailReg)
   ]);
   referralEmail = new FormControl('', [
     Validators.minLength(3),
     Validators.maxLength(100)
   ]);
   name = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(50)
+  ]);
+  username = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(50)
@@ -50,6 +58,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       name: this.name,
+      username: this.username,
       email: this.email,
       country: this.country,
       password: this.password,
@@ -58,9 +67,11 @@ export class RegisterComponent implements OnInit {
   }
 
   setClassUsername() {
+    return { 'has-danger': !this.username.pristine && !this.username.valid };
+  }
+  setClassName() {
     return { 'has-danger': !this.name.pristine && !this.name.valid };
   }
-
   setClassEmail() {
     return { 'has-danger': !this.email.pristine && !this.email.valid };
   }
@@ -87,8 +98,8 @@ export class RegisterComponent implements OnInit {
   register() {
     this.userService.register(this.registerForm.value).subscribe(
       res => {
-        this.toast.setMessage('you successfully registered!', 'success');
-        this.router.navigate(['/login']);
+        this.toast.setMessage('You successfully registered! Please login', 'success');
+        this.goToLogin();
       },
       error => this.toast.setMessage('email already exists', 'danger')
     );

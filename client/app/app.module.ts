@@ -18,6 +18,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
 import { StartComponent } from './start/start.component';
+import { NavComponent } from './nav/nav.component';
+import { RulesComponent } from './rules/rules.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { StartComponent } from './start/start.component';
     NotFoundComponent,
     HomeComponent,
     CardComponent,
-    StartComponent
+    StartComponent,
+    NavComponent,
+    RulesComponent
   ],
   imports: [
     RoutingModule,

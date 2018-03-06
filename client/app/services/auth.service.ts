@@ -54,6 +54,7 @@ export class AuthService {
     this.loggedIn = true;
     this.currentUser._id = decodedUser._id;
     this.currentUser.username = decodedUser.username;
+    this.currentUser.name = decodedUser.name;
     this.currentUser.role = decodedUser.role;
     this.currentUser.wallet = decodedUser.wallet;
     this.currentUser.winCount = decodedUser.winCount;

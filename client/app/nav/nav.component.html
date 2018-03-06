@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark blue-beauty">
+  <div class="hunnid">
+    <div class="logo">
+      <a routerLink="/" class="nav-linkz" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+              <img src="../assets/navlogo.png" class="image_full">
+              <img src="../assets/fav.png"  class="image_mobile">
+          </a>
+    </div>
+    <div class="account-detail" *ngIf="auth.loggedIn">
+      <div class="welcome">
+        Welcome, {{auth.currentUser.name}} <i class="fa fa-user"></i>
+      </div>
+      <div class="below">
+        Balance: {{auth.currentUser.wallet}} tokens
+      </div>
+    </div>
+    <div class="account-detail" *ngIf="!auth.loggedIn">
+      <div class="welcome line-height">
+        <a routerLink="/">
+          Login/Register Here
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
