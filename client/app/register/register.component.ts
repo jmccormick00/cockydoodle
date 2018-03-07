@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
   ]);
   referralEmail = new FormControl('', [
     Validators.minLength(3),
-    Validators.maxLength(100)
+    Validators.maxLength(100),
+    Validators.pattern(this.emailReg)
   ]);
   name = new FormControl('', [
     Validators.required,
@@ -64,6 +65,10 @@ export class RegisterComponent implements OnInit {
       password: this.password,
       referralEmail: this.referralEmail
     });
+  }
+
+  referNotEqualToEmail() {
+    return this.email.value == this.referralEmail.value;
   }
 
   setClassUsername() {

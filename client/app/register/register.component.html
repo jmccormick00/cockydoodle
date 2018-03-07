@@ -43,12 +43,12 @@
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-envelope"></i></span>
         </div>
-        <input class="form-control" type="email" name="referralEmail" formControlName="referralEmail" placeholder="Referral Email (optional)">
+        <input class="form-control" type="email" name="referralEmail" formControlName="referralEmail" placeholder="Optional - Who referred you? (email)">
       </div>
       By clicking Sign-up you verify that you are 18+ years of age
-      and agree to the rules, terms & conditions of CockyDoodle.com 
+      and agree to the <a style="text-decoration:underline; color:inherit;" href="full-rules" target="_blank">rules</a>, terms & conditions of CockyDoodle.com 
       <br>
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Sign-Up</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid || referNotEqualToEmail()"><i class="fa fa-user-plus"></i> Sign-Up</button>
     </form>
     Already have an account? <p class="underline" (click)="goToLogin()">Login Here</p>.
   </div>
