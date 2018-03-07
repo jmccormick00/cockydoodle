@@ -6,7 +6,7 @@
               <img src="../assets/fav.png"  class="image_mobile">
           </a>
     </div>
-    <div class="account-detail" *ngIf="auth.loggedIn">
+    <div class="account-detail" *ngIf="auth.loggedIn" (click)="home.toggleAccount()">
       <div class="welcome">
         Welcome, {{auth.currentUser.name}} <i class="fa fa-user"></i>
       </div>

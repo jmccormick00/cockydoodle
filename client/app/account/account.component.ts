@@ -3,6 +3,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { User } from '../shared/models/user.model';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-account',
@@ -15,7 +16,8 @@ export class AccountComponent implements OnInit {
 
   constructor(private auth: AuthService,
               public toast: ToastComponent,
-              private userService: UserService) { }
+              private userService: UserService,
+              public home: HomeComponent) { }
 
   ngOnInit() {
     this.getUser();
@@ -29,11 +31,12 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  save(user: User) {
-    this.userService.editUser(user).subscribe(
-      res => this.toast.setMessage('account settings saved!', 'success'),
-      error => console.log(error)
-    );
+  winPct() {
+    var pct = this.user.winCount / (this.user.winCount + this.user.lossCount);
+    pct = pct * 100;
+    pct = Math.round(pct * 10) / 10;
+
+    return pct;
   }
 
 }

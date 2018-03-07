@@ -12,9 +12,26 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  showAccount = false;
+  user: any;
+  toggleAccount() {
+    this.showAccount = !this.showAccount
+  }
+
   constructor(public auth: AuthService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+
+  }
+
+
+  winPct() {
+    console.log(this.auth.currentUser);
+    var pct = this.auth.currentUser.winCount / (this.auth.currentUser.winCount + this.auth.currentUser.lossCount);
+    pct = pct * 100;
+    pct = Math.round(pct * 10) / 10;
+
+    return pct;
   }
 
 }
