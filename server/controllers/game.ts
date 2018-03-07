@@ -90,8 +90,6 @@ export default class GameCtrl extends BaseCtrl {
           payout = potTotals.homeTotal * (element.awayTotal / potTotals.awayTotal) + element.awayTotal;
         }
         payout = Math.round(payout);
-        console.log("PAYOUT: " + payout);
-        console.log("BETLEAN: " + betLean);
         if (payout > 0) {
           updateOps.push({
             'updateOne': {
