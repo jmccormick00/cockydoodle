@@ -28,7 +28,6 @@ export class AuthService {
   login(emailAndPassword) {
     return this.userService.login(emailAndPassword).map(
       res => {
-        console.log(res);
         localStorage.setItem('token', res.token);
         const decodedUser = this.decodeUserFromToken(res.token);
         console.log(decodedUser);
