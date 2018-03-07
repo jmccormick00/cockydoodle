@@ -16,14 +16,11 @@
         Rules
       </a>
     </div>
-    <div class="sub-item">
-      <a routerLink="/logout">
-        Logout
-      </a>
-    </div>
   </div>
   <div class="coming-soon">
     <div class="soon-text">Coming Soon...</div>
     <img src="../assets/comingsoon.png">
   </div>
 </div>
+
+<app-account *ngIf="showAccount"></app-account>

@@ -172,3 +172,24 @@ body {
    display:block;
   }
 }
+
+.account-card {
+    background-color:rgb(92,29,25);
+    color:white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width:750px;
+    z-index:1000;
+}
+
+.record-title {
+    display:inline-block;
+    color:rgb(165,132,73);
+}
+
+.x-btn {
+    cursor:pointer;
+    float:right;
+}

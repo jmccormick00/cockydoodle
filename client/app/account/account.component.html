@@ -1,36 +1,42 @@
-<app-loading [condition]="isLoading"></app-loading>
 
-<app-toast [message]="toast.message"></app-toast>
-
-<div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Account settings</h4>
+<div *ngIf="!isLoading" class="card account-card">
+  <h4 class="card-header">
+    Account
+    <div (click)="home.toggleAccount()" class="x-btn">
+      <i class="fa fa-times"></i>
+    </div>
+  </h4>
   <div class="card-body">
-    <form #accountForm="ngForm" (ngSubmit)="save(user)">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
+    <i class="fa fa-user"></i> {{user.username}}<br>
+    <i class="fa fa-envelope"></i> {{user.email}}<br>
+
+    <div class="record">
+      <div class="record-title">
+        Wins
+        <div class="record-count">
+          {{user.winCount}}
         </div>
-        <input class="form-control" type="text" name="username" [(ngModel)]="user.username" placeholder="Username" required>
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+      <div class="record-title">
+        Losses
+        <div class="record-count">
+          {{user.lossCount}}
         </div>
-        <input class="form-control" type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-black-tie"></i></span>
+      <div class="record-title">
+        Win %
+        <div class="record-count">
+          {{winPct()}}
         </div>
-        <select class="custom-select" name="role" [(ngModel)]="user.role">
-          <option value="" disabled>Role</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
-        <i class="fa fa-save"></i> Save
-      </button>
-    </form>
+    </div>
+    <br>
+    <br>
+    <div class="sub-item">
+      <a routerLink="/logout">
+          <i class="fa fa-sign-out"></i>
+          Logout
+        </a>
+    </div>
   </div>
 </div>

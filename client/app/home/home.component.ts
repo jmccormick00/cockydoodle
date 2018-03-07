@@ -12,9 +12,17 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  showAccount = false;
+  user: any;
+  toggleAccount() {
+    this.showAccount = !this.showAccount
+  }
+
   constructor(public auth: AuthService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+
   }
+
 
 }
