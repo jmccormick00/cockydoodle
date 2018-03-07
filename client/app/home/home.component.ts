@@ -25,13 +25,4 @@ export class HomeComponent implements OnInit {
   }
 
 
-  winPct() {
-    console.log(this.auth.currentUser);
-    var pct = this.auth.currentUser.winCount / (this.auth.currentUser.winCount + this.auth.currentUser.lossCount);
-    pct = pct * 100;
-    pct = Math.round(pct * 10) / 10;
-
-    return pct;
-  }
-
 }
