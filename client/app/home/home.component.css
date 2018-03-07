@@ -91,8 +91,8 @@
 }
 
 .active {
-    text-decoration:underline;
     cursor:auto;
+    color:rgb(92,29,25) !important;
 }
 
 
@@ -135,4 +135,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.sub-nav {
+    font-family: 'Cinzel', serif;
 }

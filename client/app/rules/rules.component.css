@@ -5,8 +5,9 @@
     color:rgb(92,29,25);
     height:60px;
     font-size:32px;
-    padding:5px;
-    font-weight:bold;
+    padding:7px;
+    font-weight:700;
+    font-family: 'Cinzel', sans-serif;
 }
 
 .rules {
@@ -34,4 +35,8 @@
 
 .example {
     width:100vw;
+}
+
+.sub-nav {
+    font-family: 'Cinzel', serif;
 }

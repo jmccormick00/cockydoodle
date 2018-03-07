@@ -150,7 +150,7 @@ body {
 }
 
 .active {
-    text-decoration:underline;
+    color:rgb(92,29,25);
     cursor:auto;
 }
 
@@ -187,6 +187,7 @@ body {
 .record-title {
     display:inline-block;
     color:rgb(165,132,73);
+    font-family: 'Cinzel', sans-serif;
 }
 
 .x-btn {
