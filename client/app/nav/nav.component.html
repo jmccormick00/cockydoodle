@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark blue-beauty">
+<nav *ngIf="!isLoading" class="navbar navbar-expand-lg navbar-dark blue-beauty">
   <div class="hunnid">
     <div class="logo">
       <a routerLink="/" class="nav-linkz" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
@@ -8,10 +8,10 @@
     </div>
     <div class="account-detail" *ngIf="auth.loggedIn" (click)="home.toggleAccount()">
       <div class="welcome">
-        Welcome, {{auth.currentUser.name}} <i class="fa fa-user"></i>
+        Welcome, {{user.name}} <i class="fa fa-user"></i>
       </div>
       <div class="below">
-        Balance: {{auth.currentUser.wallet}} tokens
+        Balance: {{user.wallet}} tokens
       </div>
     </div>
     <div class="account-detail" *ngIf="!auth.loggedIn">
