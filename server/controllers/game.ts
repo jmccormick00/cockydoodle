@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as async from 'async';
+import * as mongoose from 'mongoose';
 
 import Game from '../models/game';
 import User from '../models/user';
@@ -12,13 +13,12 @@ export default class GameCtrl extends BaseCtrl {
 
   // Close out the game and pay the winners
   close = (req, res) => {
-    const gameId = req.params.id;
-    const homeScore = req.body.homeScore;
-    const awayScore = req.body.awayScore;
+    const gameId = mongoose.Types.ObjectId(req.params.id);
+    const homeScore = Number(req.body.homeScore);
+    const awayScore = Number(req.body.awayScore);
     const winner = homeScore > awayScore; // 1 for home, 0 for away
     async.parallel({ // Run every function in this object in parallel
       update: function(callback) {
-        console.log('INSIDE UPDATE');
         // Update the game model, set the status to 0 and update the scores
         Game.findOneAndUpdate({ _id: gameId }, {
           $set: {
@@ -29,7 +29,6 @@ export default class GameCtrl extends BaseCtrl {
         }, callback);
       },
       potTotals: function(callback) {
-        console.log("INSIDE POTTOTALS");
         // Calculate the pot totals [{ awayTotal: #, homeTotal: #}]
         Bet.aggregate([
           { $match: { // Find the bets with the gamId
@@ -46,11 +45,10 @@ export default class GameCtrl extends BaseCtrl {
               homeTotal: 1
           }}
         ], function (err, result) {
-          callback(err, result);
+          callback(err, result[0]);
         });
       },
       userTotals: function(callback) {
-        console.log("INSIDE USERTOTALS");
         // Calculate the user bet totals [{ userId: #, homeTotal: #, awayTotal: #}]
         Bet.aggregate([
           { $match: { // Find the game
@@ -80,9 +78,9 @@ export default class GameCtrl extends BaseCtrl {
       console.log(result);
       const updateOps = [];
       let payout = 0;
-      const potTotals = result.potTotals[0];
+      const potTotals = result.potTotals;
       let betLean = false; // this will determine which way the user bet, put more on home or away. 1 home, 0 away
-      result.userTotals.array.forEach(element => {
+      result.userTotals.forEach(element => {
         payout = 0;
         betLean = element.homeTotal > element.awayTotal;
         if (winner && betLean) { // home won
@@ -91,6 +89,9 @@ export default class GameCtrl extends BaseCtrl {
         if (!winner && !betLean) { // away won
           payout = potTotals.homeTotal * (element.awayTotal / potTotals.awayTotal) + element.awayTotal;
         }
+        payout = Math.round(payout);
+        console.log("PAYOUT: " + payout);
+        console.log("BETLEAN: " + betLean);
         if (payout > 0) {
           updateOps.push({
             'updateOne': {
