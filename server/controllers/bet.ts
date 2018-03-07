@@ -12,16 +12,64 @@ export default class BetCtrl extends BaseCtrl {
     insert = (req, res) => {
         const obj = new this.model(req.body);
         const amount = (obj.homeAmount > obj.awayAmount) ? obj.homeAmount : obj.awayAmount;
-        async.series([
-            function save() {
-                obj.save(function(err) {});
+        async.waterfall([
+            function saveObject(cbAsync) { // Save the bet
+                obj.save(function saveCB(err, item) {
+                    cbAsync(err, item);
+                });
             },
-            User.findOneAndUpdate({userId: obj.userId }, {$inc: {wallet: -amount}}, {}),
-            function updateGame() { // Game.findOneAndUpdate({gameId: obj.gameId}), TODO FIX - change the popularity and pots
+            function updateUser(item, cbAsync) {
+                User.findOneAndUpdate(
+                    { _id: obj.userId },
+                    { $inc: { wallet: -amount }},
+                    function userCallback (err, user) {
+                    cbAsync(err);
+                });
+            },
+            function updateGame(cbAsync) { // Update the popularity and pots
+                async.waterfall([
+                    function gameUserCount(cbAsync1) {
+                        Bet.aggregate([
+                            { $match: { // Find the game
+                                gameId: obj.gameId
+                            }},
+                            { $group: { // Group by the user
+                                _id: '$userId',
+                            }},
+                            { $group: { // Count the groups to get the distinct count
+                                _id: 1,
+                                count: { $sum: 1 }
+                            }},
+                            {$project: { // format the output, remove the gameId
+                                _id: 0,
+                                count: 1
+                            }}
+                        ], function (err, userGameCount) {
+                            cbAsync1(err, userGameCount[0].count);
+                        });
+                    },
+                    function totalUserCount(userGameCount, cbAsync1) {
+                        User.count(function (err, userTotCount) { // get the total user count
+                            const popularity = userGameCount / userTotCount;
+                            cbAsync1(err, popularity);
+                        });
+                    },
+                    function update(pop, cbAsync1) {
+                        Game.findOneAndUpdate(
+                            { _id: obj.gameId},
+                            { $inc: {awayPot: obj.awayAmount, homePot: obj.homeAmount}, $set: {popularity: pop}},
+                            function (err, item) {
+                                cbAsync1(err);
+                            }
+                        );
+                    }
+                ], function innerWaterFallCallback(err, results) {
+                    cbAsync(err);
+                });
             }
-        ], function (err) {
-            if (err) {return console.error(err); }
-            res.status(200);
+        ], function (err, result) {
+            if (err) { console.error(err); }
+            res.sendStatus(200);
         });
     }
 
