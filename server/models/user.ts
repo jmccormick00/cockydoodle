@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   role: String,
   country: String,
-  wallet: { type: Number, default: 0 },
+  wallet: { type: Number, default: 100 },
   winCount: { type: Number, default: 0 },
   lossCount: { type: Number, default: 0 },
   birthday: Date,

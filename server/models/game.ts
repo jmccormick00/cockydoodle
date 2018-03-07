@@ -7,6 +7,8 @@ const gameSchema = new mongoose.Schema({
     time: Date,
     location: String,
     popularity: { type: Number, default: 0 },
+    homePot: { type: Number, default: 0 },
+    awayPot: { type: Number, default: 0 },
     awayScore: { type: Number, default: 0 },
     homeScore: { type: Number, default: 0 },
     status: { type: Boolean, default: 1 }, // open or closed

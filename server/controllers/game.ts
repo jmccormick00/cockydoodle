@@ -17,17 +17,20 @@ export default class GameCtrl extends BaseCtrl {
     const awayScore = req.body.awayScore;
     const winner = homeScore > awayScore; // 1 for home, 0 for away
     async.parallel({ // Run every function in this object in parallel
-      update: async.apply(
+      update: function(callback) {
+        console.log('INSIDE UPDATE');
         // Update the game model, set the status to 0 and update the scores
-        this.model.update({ _id: gameId }, {
+        Game.findOneAndUpdate({ _id: gameId }, {
           $set: {
             status: 0,
             homeScore: homeScore,
             awayScore: awayScore
           }
-        }, {})
-      ),
-      potTotals: async.apply( // Calculate the pot totals { awayTotal: #, homeTotal: #}
+        }, callback);
+      },
+      potTotals: function(callback) {
+        console.log("INSIDE POTTOTALS");
+        // Calculate the pot totals [{ awayTotal: #, homeTotal: #}]
         Bet.aggregate([
           { $match: { // Find the bets with the gamId
               gameId: gameId
@@ -42,8 +45,13 @@ export default class GameCtrl extends BaseCtrl {
               awayTotal: 1,
               homeTotal: 1
           }}
-      ], {})),
-      userTotals: async.apply( // Calculate the user bet totals [{ userId: #, homeTotal: #, awayTotal: #}]
+        ], function (err, result) {
+          callback(err, result);
+        });
+      },
+      userTotals: function(callback) {
+        console.log("INSIDE USERTOTALS");
+        // Calculate the user bet totals [{ userId: #, homeTotal: #, awayTotal: #}]
         Bet.aggregate([
           { $match: { // Find the game
               gameId: gameId
@@ -59,19 +67,29 @@ export default class GameCtrl extends BaseCtrl {
               awayTotal: 1,
               homeTotal: 1
           }}
-      ], {}))
-    }, function createUserPayout(error, result) { // This function gets called when all parallel jobs are done
+        ], function (err, result) {
+          callback(err, result);
+        });
+      }
+    }, function createUserPayout(err, result) { // This function gets called when all parallel jobs are done
+      if (err) {
+        console.warn(err);
+        res.sendStatus(400);
+      }
+      console.log('IN ASYNC CALLBACK');
+      console.log(result);
       const updateOps = [];
       let payout = 0;
+      const potTotals = result.potTotals[0];
       let betLean = false; // this will determine which way the user bet, put more on home or away. 1 home, 0 away
       result.userTotals.array.forEach(element => {
         payout = 0;
         betLean = element.homeTotal > element.awayTotal;
         if (winner && betLean) { // home won
-          payout = result.potTotals.awayTotal * (element.homeTotal / result.potTotals.homeTotal) + element.homeTotal;
+          payout = potTotals.awayTotal * (element.homeTotal / potTotals.homeTotal) + element.homeTotal;
         }
         if (!winner && !betLean) { // away won
-          payout = result.potTotals.homeTotal * (element.awayTotal / result.potTotals.awayTotal) + element.awayTotal;
+          payout = potTotals.homeTotal * (element.awayTotal / potTotals.awayTotal) + element.awayTotal;
         }
         if (payout > 0) {
           updateOps.push({
@@ -90,10 +108,10 @@ export default class GameCtrl extends BaseCtrl {
         }
       });
       if (updateOps.length > 0) {
-        User.collection.bulkWrite(updateOps, { ordered: 0 }, function bulkCallback(err, r) { });
+        User.collection.bulkWrite(updateOps, { ordered: 0 }, function bulkCallback(error, r) { console.log(err); });
       }
     });
-    res.status(200).json({ status: 200});
+    res.sendStatus(200);
   }
 
 }
