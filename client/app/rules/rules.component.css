@@ -17,9 +17,9 @@
     margin-left:20px;
 }
 
-@media (max-width: 650px){
+@media (max-width: 686px){
     .rules-title {
-        font-size:5vw;
+        font-size:4vw;
         height:11vw;
     }
 }
@@ -39,4 +39,11 @@
 
 .sub-nav {
     font-family: 'Cinzel', serif;
+}
+
+
+@media (max-width: 484px){
+    .sub-item {
+        font-size:2.75vw;
+    }
 }

@@ -140,3 +140,9 @@
 .sub-nav {
     font-family: 'Cinzel', serif;
 }
+
+@media (max-width: 484px){
+    .sub-item {
+        font-size:2.75vw;
+    }
+}
