@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: String,
   role: String,
-  wallet: { type: Number, default: 100 },
+  country: String,
+  wallet: { type: Number, default: 0 },
   winCount: { type: Number, default: 0 },
   lossCount: { type: Number, default: 0 },
   birthday: Date,
@@ -36,10 +37,11 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
   });
 };
 
-// Omit the password when returning a user
+// Omit the password, referralEmail when returning a user
 userSchema.set('toJSON', {
   transform: function(doc, ret, options) {
     delete ret.password;
+    delete ret.referralEmail;
     return ret;
   }
 });

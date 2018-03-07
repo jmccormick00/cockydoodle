@@ -63,17 +63,28 @@ export default class GameCtrl extends BaseCtrl {
     }, function createUserPayout(error, result) { // This function gets called when all parallel jobs are done
       const updateOps = [];
       let payout = 0;
+      let betLean = false; // this will determine which way the user bet, put more on home or away. 1 home, 0 away
       result.userTotals.array.forEach(element => {
-        if (winner) { // home won
+        payout = 0;
+        betLean = element.homeTotal > element.awayTotal;
+        if (winner && betLean) { // home won
           payout = result.potTotals.awayTotal * (element.homeTotal / result.potTotals.homeTotal) + element.homeTotal;
-        } else { // away won
+        }
+        if (!winner && !betLean) { // away won
           payout = result.potTotals.homeTotal * (element.awayTotal / result.potTotals.awayTotal) + element.awayTotal;
         }
         if (payout > 0) {
           updateOps.push({
             'updateOne': {
               'filter': { '_id': element.userId },
-              'update': { '$inc': { 'wallet': payout } }
+              'update': { '$inc': { 'wallet': payout, 'winCount': 1 } }
+            }
+          });
+        } else {
+          updateOps.push({
+            'updateOne': {
+              'filter': { '_id': element.userId },
+              'update': { '$inc': { 'lossCount': 1 } }
             }
           });
         }
