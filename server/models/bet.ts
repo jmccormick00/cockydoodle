@@ -5,7 +5,8 @@ const betSchema = new mongoose.Schema({
     gameId: { type: mongoose.Schema.Types.ObjectId, ref: 'Game' },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     homeAmount: { type: Number, default: 0 },
-    awayAmount: { type: Number, default: 0 }
+    awayAmount: { type: Number, default: 0 },
+    date: { type: Date, default: Date.now }
 });
 
 // Create a model
