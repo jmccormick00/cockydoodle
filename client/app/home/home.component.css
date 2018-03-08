@@ -21,17 +21,12 @@
     margin-top:5px;
 }
 
-.navbar {
-    /*padding:0px;*/
-}
-
 .right-align {
     text-align:right;
     width:75%;
     line-height:45px;
 }
 .nav-item {
-    display:inline-block;
     float:right;
 }
 
@@ -91,8 +86,8 @@
 }
 
 .active {
-    text-decoration:underline;
     cursor:auto;
+    color:rgb(92,29,25) !important;
 }
 
 
@@ -122,12 +117,10 @@
 .coming-soon img {
     height:100vh;
     
-    filter: blur(7px);
 }
 
 .soon-text {
     color:white;
-    text-shadow: 2px 2px #00000f;
     font-size:30px;
     font-weight:bold;
     position:absolute;
@@ -135,4 +128,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.sub-nav {
+    font-family: 'Cinzel', serif;
+}
+
+@media (max-width: 484px){
+    .sub-item {
+        font-size:2.75vw;
+    }
+}
+
+.padder {
+    padding:20px;
 }

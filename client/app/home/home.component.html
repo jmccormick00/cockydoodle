@@ -1,5 +1,4 @@
 <start *ngIf="!auth.loggedIn"></start>
-
 <div *ngIf="auth.loggedIn">
   <app-nav></app-nav>
   <div class="sub-nav">
@@ -18,7 +17,12 @@
     </div>
   </div>
   <div class="coming-soon">
-    <div class="soon-text">Coming Soon...</div>
+    <div class="soon-text card account-card">
+      <h4 class="card-header">
+        {{message}}
+      </h4>
+      <h4 class="padder" >Check back after the bracket is unveiled. First game is Tuesday March 13</h4>
+    </div>
     <img src="../assets/comingsoon.png">
   </div>
 </div>
