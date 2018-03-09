@@ -15,3 +15,10 @@
     background-color: rgb(175,152,73);
     border-color: rgb(175,152,73);
 }
+
+
+.error-message {
+    display:block;
+    margin-top:-15px;
+    font-size:10px;
+}
