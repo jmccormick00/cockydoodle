@@ -101,12 +101,11 @@ export class RegisterComponent implements OnInit {
   }
 
   checkInputs() {
-    this.badReferralEmail = this.referralEmail.value != "" && (this.email.value == this.referralEmail.value);
+    this.badReferralEmail = !this.referralEmail.pristine && !this.referralEmail.valid || this.referralEmail.value != "" && (this.email.value == this.referralEmail.value);
     this.badCountry = !this.country.pristine && !this.country.valid;
     this.badEmail = !this.email.pristine && !this.email.valid;
     this.badName = !this.name.pristine && !this.name.valid;
     this.badUsername = !this.username.pristine && !this.username.valid;
-    console.log(this.password.value.length);
     this.badPassword = this.password.value.length > 0 && this.password.value.length <= 6;
   }
 
