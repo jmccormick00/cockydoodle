@@ -22,6 +22,7 @@ import { NavComponent } from './nav/nav.component';
 import { RulesComponent } from './rules/rules.component';
 import { FullRulesComponent } from './full-rules/full-rules.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     StartComponent,
     NavComponent,
     RulesComponent,
-    FullRulesComponent
+    FullRulesComponent,
+    LeaderboardComponent
   ],
   imports: [
     RoutingModule,

@@ -4,6 +4,7 @@ import { StartComponent } from '../start/start.component';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 
 
 import { Observable, Subscription } from 'rxjs/Rx';

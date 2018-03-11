@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get<User[]>('/api/users');
   }
 
+  getLeaderboard(): Observable<any> {
+    return this.http.get<any>('/api/leaderboard');
+  }
+
   countUsers(): Observable<number> {
     return this.http.get<number>('/api/users/count');
   }

@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { StartComponent } from './start/start.component';
 import { RulesComponent } from './rules/rules.component';
 import { FullRulesComponent } from './full-rules/full-rules.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'full-rules', component: FullRulesComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'rules', component: RulesComponent },
+  { path: 'leaderboard', component: LeaderboardComponent},
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardAdmin] },
   { path: 'notfound', component: NotFoundComponent },
