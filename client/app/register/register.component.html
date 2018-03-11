@@ -4,52 +4,76 @@
   <h4 class="card-header">Register</h4>
   <div class="card-body">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </div>
+        <input autofocus (change)="setClassEmail()" class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
+      </div>
+      <div *ngIf="badEmail" class="error-message">Please enter a valid email.</div>
+
       <div class="input-group" [ngClass]="setClassUsername()">
         <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
+          <span class="input-group-text">
+            <i class="fa fa-user"></i>
+          </span>
         </div>
-        <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
+        <input (change)="checkInputs()" class="form-control" type="text" name="username" formControlName="username" placeholder="Username"
+          >
       </div>
+      <div *ngIf="badUsername" class="error-message">Please enter a valid username.</div>
 
-      <div class="input-group" [ngClass]="setClassName()">
+      <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
+          <span class="input-group-text">
+            <i class="fa fa-user"></i>
+          </span>
         </div>
-        <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+        <input class="form-control" (change)="checkInputs()" type="text" name="name" formControlName="name" placeholder="Name">
       </div>
+      <div *ngIf="badName" class="error-message">Please enter a valid name.</div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-globe"></i>
+          </span>
+        </div>
+        <input (change)="checkInputs()" class="form-control" type="text" name="country" formControlName="country" placeholder="Country">
+      </div>
+      <div *ngIf="badCountry" class="error-message">Please enter a valid country.</div>
 
-      <div class="input-group" [ngClass]="setClassEmail()">
+      <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+          <span class="input-group-text">
+            <i class="fa fa-key"></i>
+          </span>
         </div>
-        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
+        <input (change)="checkInputs()" class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
       </div>
+      <div *ngIf="badPassword" class="error-message">Please enter a valid password.</div>
 
-      <div class="input-group" [ngClass]="setClassCountry()">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-globe"></i></span>
-        </div>
-        <input class="form-control" type="text" name="country" formControlName="country" placeholder="Country">
-      </div>
 
-      <div class="input-group" [ngClass]="setClassPassword()">
+      <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-key"></i></span>
+          <span class="input-group-text">
+            <i class="fa fa-envelope"></i>
+          </span>
         </div>
-        <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
+        <input (change)="checkInputs()" class="form-control" type="email" name="referralEmail" formControlName="referralEmail"
+          placeholder="Optional - Who referred you? (email)">
       </div>
+      <div *ngIf="badReferralEmail" class="error-message">Please enter a valid referral email.</div>
 
-      <div class="input-group" [ngClass]="setClassReferralEmail()">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-        </div>
-        <input class="form-control" type="email" name="referralEmail" formControlName="referralEmail" placeholder="Optional - Who referred you? (email)">
-      </div>
-      By clicking Sign-up you verify that you are 18+ years of age
-      and agree to the <a style="text-decoration:underline; color:inherit;" href="full-rules" target="_blank">rules</a>, terms & conditions of CockyDoodle.com 
+      By clicking Sign-up you verify that you are 18+ years of age and agree to the
+      <a style="text-decoration:underline; color:inherit;"
+        href="full-rules" target="_blank">rules</a>, terms & conditions of CockyDoodle.com
       <br>
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid || referNotEqualToEmail()"><i class="fa fa-user-plus"></i> Sign-Up</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid || referNotEqualToEmail()">
+        <i class="fa fa-user-plus"></i> Sign-Up</button>
     </form>
-    Already have an account? <p class="underline" (click)="goToLogin()">Login Here</p>.
+    Already have an account?
+    <p class="underline" (click)="goToLogin()">Login Here</p>.
   </div>
 </div>
