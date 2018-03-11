@@ -96,7 +96,7 @@ export default class GameCtrl extends BaseCtrl {
           win = 0;
           lose = 1;
         }
-        //console.log("userId: " + element.userId + "  payout: " + payout);
+        // console.log("userId: " + element.userId + "  payout: " + payout);
         updateOps.push({
           'updateOne': {
             'filter': { '_id': element.userId },
@@ -105,7 +105,7 @@ export default class GameCtrl extends BaseCtrl {
         });
       });
       if (updateOps.length > 0) {
-        //console.log(updateOps);
+        // console.log(updateOps);
         User.collection.bulkWrite(updateOps, { ordered: 0 }, function bulkCallback(error, r) { console.log(err); });
       }
     });
