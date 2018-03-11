@@ -16,6 +16,7 @@ export default function setRoutes(app) {
 
   // Bets
   router.route('/bet').post(betCtrl.insert);
+  router.route('/bet/positions/:id').get(betCtrl.positions);
 
   // Games
   router.route('/game').get(gameCtrl.getAll);

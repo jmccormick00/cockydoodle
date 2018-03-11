@@ -74,39 +74,38 @@ export default class GameCtrl extends BaseCtrl {
         console.warn(err);
         res.sendStatus(400);
       }
-      console.log('IN ASYNC CALLBACK');
-      console.log(result);
       const updateOps = [];
       let payout = 0;
+      let win = 0;
+      let lose = 0;
       const potTotals = result.potTotals;
       let betLean = false; // this will determine which way the user bet, put more on home or away. 1 home, 0 away
       result.userTotals.forEach(element => {
         payout = 0;
-        betLean = element.homeTotal > element.awayTotal;
-        if (winner && betLean) { // home won
+        betLean = element.homeTotal > element.awayTotal; // 1 home, 0 away
+        if (winner) { // home won
           payout = potTotals.awayTotal * (element.homeTotal / potTotals.homeTotal) + element.homeTotal;
-        }
-        if (!winner && !betLean) { // away won
+        } else { // away won
           payout = potTotals.homeTotal * (element.awayTotal / potTotals.awayTotal) + element.awayTotal;
         }
         payout = Math.round(payout);
-        if (payout > 0) {
-          updateOps.push({
-            'updateOne': {
-              'filter': { '_id': element.userId },
-              'update': { '$inc': { 'wallet': payout, 'winCount': 1 } }
-            }
-          });
+        if ((winner && betLean) || (!winner && !betLean)) {
+          win = 1;
+          lose = 0;
         } else {
-          updateOps.push({
-            'updateOne': {
-              'filter': { '_id': element.userId },
-              'update': { '$inc': { 'lossCount': 1 } }
-            }
-          });
+          win = 0;
+          lose = 1;
         }
+        console.log("userId: " + element.userId + "  payout: " + payout);
+        updateOps.push({
+          'updateOne': {
+            'filter': { '_id': element.userId },
+            'update': { '$inc': { 'wallet': payout, 'winCount': win, 'lossCount': lose } }
+          }
+        });
       });
       if (updateOps.length > 0) {
+        console.log(updateOps);
         User.collection.bulkWrite(updateOps, { ordered: 0 }, function bulkCallback(error, r) { console.log(err); });
       }
     });
