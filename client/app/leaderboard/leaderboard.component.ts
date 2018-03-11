@@ -21,7 +21,7 @@ export class LeaderboardComponent implements OnInit {
 
   loadLeaderboard() {
     this.userService.getLeaderboard().subscribe(
-      data => console.log(data),
+      data => this.leaderboard = data,
       error => console.log(error),
       () => this.isLoading = false
     );

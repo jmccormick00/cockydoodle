@@ -1,11 +1,12 @@
 <div class="leaderboard" *ngIf="!isLoading">
+    <div class="leaderboard-head">Overall Leaderboard</div>
+    <div class="leaderboard-title">Player</div>
+    <div class="leaderboard-title">Tokens</div>
 
-<div class="leaderboard-title">Player</div>
-<div class="leaderboard-title">Tokens</div>
-
-<div  class="leaderboard-item">
-
-</div>
+    <div *ngFor="let user of leaderboard" class="leaderboard-item">
+        <div class="leaderboard-detail">{{user.username}}</div>
+        <div class="leaderboard-detail">{{user.wallet}}</div>
+    </div>
 
 
 

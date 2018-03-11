@@ -25,6 +25,10 @@ export class UserService {
     return this.http.get<any>('/api/leaderboard');
   }
 
+  getGames(): Observable<any> {
+    return this.http.get<any>('/api/game');
+  }
+
   countUsers(): Observable<number> {
     return this.http.get<number>('/api/users/count');
   }

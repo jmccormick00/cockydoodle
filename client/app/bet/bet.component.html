@@ -1,3 +1,68 @@
-<p>
-  bet works!
-</p>
+<div *ngIf="!isLoading">
+  <div *ngFor="let game of games" class="bet">
+    <div class="bet-header">NCAA B: Who will win this matchup?</div>
+    <div class="bet-content">
+      <div class="time">
+        {{getTime(game.time)}}
+        <div class="location">
+          {{game.location}}
+        </div>
+      </div>
+      <div class="teams">
+        <div class="team bottom">
+          {{game.homeTeam}}
+        </div>
+        <div class="team">
+          {{game.awayTeam}}
+        </div>
+      </div>
+      <div class="scores">
+        <div class="score bottom">
+          --
+        </div>
+        <div class="score">
+          --
+        </div>
+      </div>
+
+      <div class="popularity">
+        <div class="pop-bar">
+            {{truncate(game.popularity * 100)}}
+        </div>
+        <div class="pop-text">
+          Popularity
+        </div>
+      </div>
+
+      <div class="nums">
+        <div class="num bottom">
+          {{truncate((game.homePot / (game.homePot + game.awayPot) * 100))}}%
+        </div>
+        <div class="num">
+          {{truncate2((game.awayPot / (game.homePot + game.awayPot) * 100))}}%
+        </div>
+      </div>
+
+      <div class="tokens">
+        <input type="number" class="token-bar">
+        <div class="token-text">
+          Tokens
+        </div>
+      </div>
+
+      <div class="checkboxes">
+        <div class="check">
+          <div class="checkbox"></div>
+        </div>
+        <div class="check">
+          <div class="checkbox"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div (click)="makeBet()" class="submit">
+    Submit
+  </div>
+
+</div>
