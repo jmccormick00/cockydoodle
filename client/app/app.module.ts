@@ -23,6 +23,7 @@ import { RulesComponent } from './rules/rules.component';
 import { FullRulesComponent } from './full-rules/full-rules.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { BetComponent } from './bet/bet.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     NavComponent,
     RulesComponent,
     FullRulesComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    BetComponent
   ],
   imports: [
     RoutingModule,

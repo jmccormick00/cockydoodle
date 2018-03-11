@@ -143,3 +143,23 @@
 .padder {
     padding:20px;
 }
+
+.day-title {
+    background-color:rgb(165,132,73);
+    margin:20px;
+    border:1px solid rgb(92,29,25);
+    color:rgb(92,29,25);
+    height:60px;
+    font-size:28px;
+    padding:8px;
+    font-weight:700;
+    font-family: 'Cinzel', sans-serif;
+    text-align:center;
+}
+
+@media (max-width: 863px){
+    .day-title {
+        font-size:3.7vw;
+        height:13vw;
+    }
+}
