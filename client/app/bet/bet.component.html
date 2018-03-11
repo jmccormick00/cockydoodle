@@ -1,5 +1,6 @@
 <div *ngIf="!isLoading">
-  <div *ngFor="let game of games" class="bet">
+  <form class="betForm" *ngFor="let game of games" [formGroup]="betForm" (ngSubmit)="makeBet()">
+  <div class="bet">
     <div class="bet-header">NCAA B: Who will win this matchup?</div>
     <div class="bet-content">
       <div class="time">
@@ -44,7 +45,7 @@
       </div>
 
       <div class="tokens">
-        <input type="number" class="token-bar">
+        <input type="number" name="amount" formControlName="amount" class="token-bar">
         <div class="token-text">
           Tokens
         </div>
@@ -52,17 +53,15 @@
 
       <div class="checkboxes">
         <div class="check">
-          <div class="checkbox"></div>
+          <div (click)="awayTeamZero()" class="checkbox"></div>
         </div>
         <div class="check">
-          <div class="checkbox"></div>
+          <div (click)="homeTeamZero()" class="checkbox"></div>
         </div>
       </div>
 
     </div>
   </div>
-  <div (click)="makeBet()" class="submit">
-    Submit
-  </div>
-
+  <button class="submit" type="submit">Submit</button>
+</form>
 </div>
