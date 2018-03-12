@@ -11,6 +11,14 @@ import BaseCtrl from './base';
 export default class GameCtrl extends BaseCtrl {
   model = Game;
 
+    // Get all, sort by date
+    getAll = (req, res) => {
+      this.model.find({}, null, {sort: 'time'}, (err, docs) => {
+        if (err) { return console.error(err); }
+        res.status(200).json(docs);
+      });
+    }
+
   // Close out the game and pay the winners
   close = (req, res) => {
     const gameId = mongoose.Types.ObjectId(req.params.id);
