@@ -6,7 +6,6 @@ import { AuthService } from '../services/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 
-
 import { Observable, Subscription } from 'rxjs/Rx';
 import { ElementRef, OnDestroy } from '@angular/core';
 

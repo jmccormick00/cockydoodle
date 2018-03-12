@@ -41,6 +41,10 @@ export class UserService {
     return this.http.get<User>(`/api/user/${user._id}`);
   }
 
+  makeBet(betObject): Observable<any> {
+    return this.http.post<any>('/api/bet', betObject);
+  }
+
   editUser(user: User): Observable<string> {
     return this.http.put(`/api/user/${user._id}`, user, { responseType: 'text' });
   }

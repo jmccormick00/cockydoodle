@@ -15,23 +15,30 @@ export class BetComponent implements OnInit {
   awayPercentage: any;
   betForm: any;
 
-  homeTeam: any = true;
-  awayTeam: any = false;
-
   user: any;
 
   amount = new FormControl('', [
     Validators.required
   ]);
+  homeOrAway = new FormControl('', [
+    Validators.required
+  ]);
 
+  tooMuch: any;
+  enterAmount: any;
+  pickATeam: any;
+
+  erroredGame: any;
 
   constructor(public auth: AuthService, public userService: UserService, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.tooMuch = false;
     this.getGames();
     this.getUser();
     this.betForm = this.formBuilder.group({
-      amount: this.amount
+      amount: this.amount,
+      homeOrAway: this.homeOrAway
     });
   }
 
@@ -67,33 +74,47 @@ export class BetComponent implements OnInit {
     return time;
   }
 
-  makeBet() {
-    var homeAmount = 0;
-    var awayAmount = 0;
-    if (this.homeTeam) {
-      homeAmount = this.betForm.amount;
+  makeBet(betform, gameId) {
+    if(betform.value.amount == "") {
+      this.erroredGame = gameId;
+      this.enterAmount = true;
+      this.tooMuch = false;
+      this.pickATeam = false;
+    } else if(betform.value.homeOrAway == "") {
+      this.erroredGame = gameId;
+      this.pickATeam = true;
+      this.tooMuch = false;
+      this.enterAmount = false;
+    } else if (betform.value.amount > this.user.wallet) {
+      this.erroredGame = gameId;
+      this.tooMuch = true;
+      this.enterAmount = false;
+      this.pickATeam = false;
     } else {
-      awayAmount = this.betForm.amount
+      this.tooMuch = false;
+      this.pickATeam = false;
+      this.enterAmount = false;
+      var homeAmount = 0;
+      var awayAmount = 0;
+      this.user.wallet -= betform.value.amount;
+      if (betform.value.homeOrAway == "home") {
+        homeAmount = betform.value.amount;
+      } else {
+        awayAmount = betform.value.amount;
+      }
+      var betObject = {
+        gameId: gameId,
+        userId: this.user._id,
+        homeAmount: homeAmount,
+        awayAmount: awayAmount
+      }
+      this.userService.makeBet(betObject).subscribe(
+        data => console.log(data),
+        error => console.log(error)
+      );
     }
-    var betObject = {
-      gameId: this.games[0].gameId,
-      userId: this.user.userId,
-      homeAmount: homeAmount,
-      awayAmount: awayAmount,
-      date: Date.now()
-    }
-    console.log(betObject);
   }
 
-  homeTeamZero() {
-    this.homeTeam = false;
-    this.awayTeam = true;
-  }
-
-  awayTeamZero() {
-    this.awayTeam = false;
-    this.homeTeam = true;
-  }
 
 }
 

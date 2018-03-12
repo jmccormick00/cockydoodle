@@ -1,68 +1,86 @@
 <div *ngIf="!isLoading">
-  <form class="betForm" *ngFor="let game of games" [formGroup]="betForm" (ngSubmit)="makeBet()">
-  <div class="bet">
-    <div class="bet-header">NCAA B: Who will win this matchup?</div>
-    <div class="bet-content">
-      <div class="time">
-        {{getTime(game.time)}}
-        <div class="location">
-          {{game.location}}
-        </div>
-      </div>
-      <div class="teams">
-        <div class="team bottom">
-          {{game.homeTeam}}
-        </div>
-        <div class="team">
-          {{game.awayTeam}}
-        </div>
-      </div>
-      <div class="scores">
-        <div class="score bottom">
-          --
-        </div>
-        <div class="score">
-          --
-        </div>
-      </div>
-
-      <div class="popularity">
-        <div class="pop-bar">
-            {{truncate(game.popularity * 100)}}
-        </div>
-        <div class="pop-text">
-          Popularity
-        </div>
-      </div>
-
-      <div class="nums">
-        <div class="num bottom">
-          {{truncate((game.homePot / (game.homePot + game.awayPot) * 100))}}%
-        </div>
-        <div class="num">
-          {{truncate2((game.awayPot / (game.homePot + game.awayPot) * 100))}}%
-        </div>
-      </div>
-
-      <div class="tokens">
-        <input type="number" name="amount" formControlName="amount" class="token-bar">
-        <div class="token-text">
-          Tokens
-        </div>
-      </div>
-
-      <div class="checkboxes">
-        <div class="check">
-          <div (click)="awayTeamZero()" class="checkbox"></div>
-        </div>
-        <div class="check">
-          <div (click)="homeTeamZero()" class="checkbox"></div>
-        </div>
-      </div>
-
-    </div>
+  <div class="day-title">
+    March 13, 2018 – College Basketball Challenge Day 1
   </div>
-  <!-- <button class="submit" type="submit">Submit</button> -->
-  Betting will be open soon!
-</form>
+  <form class="betForm" *ngFor="let game of games" [formGroup]="betForm" (ngSubmit)="makeBet(betForm, game._id)">
+    <div class="bet">
+      <div class="bet-header">NCAA B: Who will win this matchup?</div>
+      <div class="bet-content">
+        <div class="time">
+          {{getTime(game.time)}}
+          <div class="location">
+            {{game.location}}
+          </div>
+        </div>
+        <div class="teams">
+          <div class="team bottom">
+            {{game.homeTeam}}
+          </div>
+          <div class="team">
+            {{game.awayTeam}}
+          </div>
+        </div>
+        <div class="scores">
+          <div class="score bottom">
+            --
+          </div>
+          <div class="score">
+            --
+          </div>
+        </div>
+
+        <div class="popularity">
+          <div *ngIf="game.popularity <= 0.05" class="pop-bar">
+            <div class="pop-bar-small">
+            </div>
+          </div>
+          <div *ngIf="game.popularity > 0.05 && game.popularity < 0.2" class="pop-bar">
+            <div class="pop-bar-med">
+            </div>
+          </div>
+          <div *ngIf="game.popularity >= 0.2" class="pop-bar">
+            <div class="pop-bar-lg">
+            </div>
+          </div>
+          <div class="pop-text">
+            Popularity
+          </div>
+        </div>
+
+        <div class="nums">
+          <div class="num bottom">
+            {{truncate((game.homePot / (game.homePot + game.awayPot) * 100))}}%
+          </div>
+          <div class="num">
+            {{truncate2((game.awayPot / (game.homePot + game.awayPot) * 100))}}%
+          </div>
+        </div>
+
+        <div class="tokens">
+          <input type="number" name="amount" formControlName="amount" class="token-bar" />
+          <div class="token-text">
+            Tokens
+          </div>
+        </div>
+
+        <div class="checkboxes">
+          <div class="check bottom">
+            <input type="radio" value="home" name="homeOrAway" formControlName="homeOrAway" class="checkbox" required>
+            <div class="lilteam">{{game.homeTeam}}</div>
+          </div>
+          <div class="check">
+            <input type="radio" value="away" name="homeOrAway" formControlName="homeOrAway" class="checkbox" required>
+            <div class="lilteam">{{game.awayTeam}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="errorMessage" *ngIf="tooMuch && game._id == erroredGame">You cannot bet more than your available balance.</div>
+    <div class="errorMessage" *ngIf="enterAmount && game._id == erroredGame">Please enter a bet amount.</div>
+    <div class="errorMessage" *ngIf="pickATeam && game._id == erroredGame">Please choose a winning team.</div>
+    <button class="submit" type="submit">Submit</button>
+  </form>
+  <!-- <div class="day-title">
+    March 14, 2018 – College Basketball Challenge Day 2
+  </div> -->
 </div>

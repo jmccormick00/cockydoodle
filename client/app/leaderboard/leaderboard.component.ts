@@ -14,7 +14,6 @@ export class LeaderboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadLeaderboard();
-    console.log(this.leaderboard);
   }
 
 

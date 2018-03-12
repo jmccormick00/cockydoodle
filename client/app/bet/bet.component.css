@@ -16,17 +16,22 @@
 }
 
 .time {
-    padding:20px;
+    padding:19px;
     border-right:1px solid rgb(92,29,25);
     width:160px;
     display:inline-block;
     text-align:center;
     vertical-align:top;
 }
+button:focus {outline:0;}
+
+.errorMessage {
+    padding-left:20px;
+}
 
 .teams {
     display:inline-block;
-    width: calc(100% - 490px);
+    width: calc(100% - 495px);
     height:86px;
     vertical-align:top;
     margin-left:-4px;
@@ -83,6 +88,27 @@
     margin-top:20px;
 }
 
+.pop-bar-small {
+    width:25px;
+    height:21px;
+    background-color:rgb(92, 29, 25);
+    margin-top:1px;
+    margin-left:1px;
+}
+.pop-bar-med {
+    width:50px;
+    height:21px;
+    background-color:rgb(92, 29, 25);
+    margin-top:1px;
+    margin-left:1px;
+}
+.pop-bar-lg {
+    width:75px;
+    height:21px;
+    background-color:rgb(92, 29, 25);
+    margin-top:1px;
+    margin-left:1px;
+}
 .pop-text {
     color:black;
     font-size:12px;
@@ -122,11 +148,16 @@
 }
 .check {
     display:block;
-    padding:7px;
+    text-align:center;
+    margin-left:-1px;
+    width:57px;
+}
+
+.lilteam {
+    font-size:6px;
 }
 
 .checkbox {
-    width:30px;
     height:30px;
     background-color:rgb(202,185,151);
     border:1px solid rgb(165,132,73);
