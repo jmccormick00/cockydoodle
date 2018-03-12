@@ -31,7 +31,7 @@ export class BetComponent implements OnInit {
   pickATeam: any;
   madeBet = false;
   erroredGame: any;
-
+  noDecimal: any;
   constructor(public nav: NavComponent, public auth: AuthService, public userService: UserService, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -70,6 +70,9 @@ export class BetComponent implements OnInit {
     var time = "";
     var datez = new Date(date);
     datez.setHours(datez.getHours() + 4);
+    if(datez.getHours() > 12) {
+      datez.setHours(datez.getHours() - 12);
+    }
     time += datez.getHours();
     time += ":";
     time += datez.getMinutes();
@@ -77,6 +80,7 @@ export class BetComponent implements OnInit {
   }
 
   makeBet(betform, gameId) {
+    betform.value.amount = Math.floor(betform.value.amount);
     if(betform.value.amount == "") {
       this.erroredGame = gameId;
       this.enterAmount = true;
