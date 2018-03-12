@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading">
   <div class="day-title">
-    March 13, 2018 – College Basketball Challenge Day 1
+    March 12, 2018 – College Basketball Challenge Day 1
   </div>
   <form class="betForm" *ngFor="let game of games" [formGroup]="betForm" (ngSubmit)="makeBet(betForm, game._id)">
     <div class="bet">
@@ -79,6 +79,7 @@
     <div class="errorMessage" *ngIf="enterAmount && game._id == erroredGame">Please enter a bet amount.</div>
     <div class="errorMessage" *ngIf="pickATeam && game._id == erroredGame">Please choose a winning team.</div>
     <button class="submit" type="submit">Submit</button>
+    <div *ngIf="game._id == erroredGame && madeBet" class="success">Successfully made bet!</div>
   </form>
   <!-- <div class="day-title">
     March 14, 2018 – College Basketball Challenge Day 2

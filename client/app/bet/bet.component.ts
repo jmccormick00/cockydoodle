@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-bet',
   templateUrl: './bet.component.html',
-  styleUrls: ['./bet.component.css']
+  styleUrls: ['./bet.component.css'],
+  providers: [ NavComponent ]
 })
 export class BetComponent implements OnInit {
   games: any;
@@ -27,10 +29,10 @@ export class BetComponent implements OnInit {
   tooMuch: any;
   enterAmount: any;
   pickATeam: any;
-
+  madeBet = false;
   erroredGame: any;
 
-  constructor(public auth: AuthService, public userService: UserService, public formBuilder: FormBuilder) { }
+  constructor(public nav: NavComponent, public auth: AuthService, public userService: UserService, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.tooMuch = false;
@@ -97,6 +99,7 @@ export class BetComponent implements OnInit {
       var homeAmount = 0;
       var awayAmount = 0;
       this.user.wallet -= betform.value.amount;
+
       if (betform.value.homeOrAway == "home") {
         homeAmount = betform.value.amount;
       } else {
@@ -109,6 +112,17 @@ export class BetComponent implements OnInit {
         awayAmount: awayAmount
       }
       this.userService.makeBet(betObject).subscribe(
+        success => {
+          console.log(21);
+          this.madeBet = true;
+          this.erroredGame = gameId;
+        },
+        error => {
+          console.log(1);
+          this.madeBet = true;
+          this.erroredGame = gameId;
+          window.location.reload();
+        }
       );
     }
   }
