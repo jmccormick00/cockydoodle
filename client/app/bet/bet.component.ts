@@ -109,8 +109,6 @@ export class BetComponent implements OnInit {
         awayAmount: awayAmount
       }
       this.userService.makeBet(betObject).subscribe(
-        data => console.log(data),
-        error => console.log(error)
       );
     }
   }
