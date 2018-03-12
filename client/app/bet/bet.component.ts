@@ -25,7 +25,8 @@ export class BetComponent implements OnInit {
   homeOrAway = new FormControl('', [
     Validators.required
   ]);
-
+  firstFour:any;
+  firstRound: any;
   tooMuch: any;
   enterAmount: any;
   pickATeam: any;
@@ -35,6 +36,8 @@ export class BetComponent implements OnInit {
   constructor(public nav: NavComponent, public auth: AuthService, public userService: UserService, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.firstRound = new Array();
+    this.firstFour = new Array();
     this.tooMuch = false;
     this.getGames();
     this.getUser();
@@ -53,7 +56,17 @@ export class BetComponent implements OnInit {
 
   getGames() {
     this.userService.getGames().subscribe(
-      data => this.games = data,
+      data => {
+        this.games = data;
+        for(var i = 0; i < this.games.length; i++) {
+          if (i < 4) {
+            this.firstFour[i] = this.games[i];
+          }
+          if (i >= 4) {
+            this.firstRound[i - 4] = this.games[i];
+          }
+        }
+      },
       error => console.log(error),
       () => this.isLoading = false
     );
