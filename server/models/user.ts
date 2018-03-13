@@ -42,6 +42,9 @@ userSchema.set('toJSON', {
   transform: function(doc, ret, options) {
     delete ret.password;
     delete ret.referralEmail;
+    delete ret.joinDate;
+    delete ret.birthday;
+    delete ret.country;
     return ret;
   }
 });
