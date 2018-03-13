@@ -60,10 +60,9 @@ export class BetComponent implements OnInit {
         this.games = data;
         for(var i = 0; i < this.games.length; i++) {
           if (i < 4) {
-            if(this.games[i].homeTeam != "Radford") {
-              
+            if(this.games[i].homeTeam != "16 Radford") {
+              this.firstFour[i] = this.games[i];
             }
-            this.firstFour[i] = this.games[i];
           }
           if (i >= 4) {
             this.firstRound[i - 4] = this.games[i];
