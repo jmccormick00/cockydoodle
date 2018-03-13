@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -24,6 +25,7 @@ import { FullRulesComponent } from './full-rules/full-rules.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { BetComponent } from './bet/bet.component';
+import { TokenInterceptor } from './token.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,12 @@ import { BetComponent } from './bet/bet.component';
     AuthGuardLogin,
     AuthGuardAdmin,
     CatService,
-    UserService
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
