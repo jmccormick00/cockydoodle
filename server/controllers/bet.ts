@@ -57,7 +57,7 @@ export default class BetCtrl extends BaseCtrl {
                 function updateUser(item, cbAsync) {
                     User.findOneAndUpdate(
                         { _id: obj.userId },
-                        { $inc: { wallet: amount }},
+                        { $inc: { wallet: -amount }},
                         function userCallback (err, userU) {
                         cbAsync(err);
                     });
