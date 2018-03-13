@@ -94,7 +94,7 @@ export class BetComponent implements OnInit {
 
   makeBet(betform, gameId) {
     betform.value.amount = Math.floor(betform.value.amount);
-    if(betform.value.amount == "") {
+    if(betform.value.amount == "" || betform.value.amount <= 0) {
       this.erroredGame = gameId;
       this.enterAmount = true;
       this.tooMuch = false;

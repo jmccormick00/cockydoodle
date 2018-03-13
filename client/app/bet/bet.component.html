@@ -158,7 +158,7 @@
       </div>
     </div>
     <div class="errorMessage" *ngIf="tooMuch && game._id == erroredGame">You cannot bet more than your available balance.</div>
-    <div class="errorMessage" *ngIf="enterAmount && game._id == erroredGame">Please enter a bet amount.</div>
+    <div class="errorMessage" *ngIf="enterAmount && game._id == erroredGame">Please enter a valid bet amount.</div>
     <div class="errorMessage" *ngIf="pickATeam && game._id == erroredGame">Please choose a winning team.</div>
     <button class="submit" type="submit">Submit</button>
     <div *ngIf="game._id == erroredGame && madeBet" class="success">Successfully made bet!</div>
