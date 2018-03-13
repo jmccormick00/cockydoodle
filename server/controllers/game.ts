@@ -116,8 +116,8 @@ export default class GameCtrl extends BaseCtrl {
         // console.log(updateOps);
         User.collection.bulkWrite(updateOps, { ordered: 0 }, function bulkCallback(error, r) { console.log(err); });
       }
+      res.status(200).json({gameTotals: result, userUpdates: updateOps});
     });
-    res.sendStatus(200);
   }
 
 }

@@ -1,11 +1,8 @@
 import * as express from 'express';
-import * as dotenv from 'dotenv';
 
 import GameCtrl from './controllers/game';
 import BetCtrl from './controllers/bet';
 import UserCtrl from './controllers/user';
-// import Game from './models/game';
-// import User from './models/user';
 
 export default function setRoutes(app, passport) {
 
@@ -29,15 +26,14 @@ export default function setRoutes(app, passport) {
   router.put('/game/close/:id', passport.authenticate('jwt', { session: false}), gameCtrl.close);
 
   // Users
-  // router.put('/user/:id', userCtrl.update);
-  // router.delete('/user/:id', userCtrl.delete);
   router.post('/login', userCtrl.login);
   router.get('/users/count', userCtrl.count);
   router.post('/user', userCtrl.insert);
   router.get('/user/:id', passport.authenticate('jwt', { session: false}), userCtrl.get);
+
+  // Leaderboard
   router.get('/leaderboard', passport.authenticate('jwt', { session: false}), userCtrl.getLeaderboard);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
-
 }

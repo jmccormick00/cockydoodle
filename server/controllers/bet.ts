@@ -36,6 +36,11 @@ export default class BetCtrl extends BaseCtrl {
     // Insert
     insert = (req, res) => {
         const obj = new this.model(req.body);
+        if (obj.homeAmount !== 0 && obj.awayAmount !== 0)  {
+            res.sendStatus(400);
+        }
+        obj.homeAmount = Math.abs(obj.homeAmount);
+        obj.awayAmount = Math.abs(obj.awayAmount);
         const amount = (obj.homeAmount > obj.awayAmount) ? obj.homeAmount : obj.awayAmount;
         User.findById(obj.userId, function checkUsersWallet (error, user) {
             if (error) { console.log(error); }
@@ -52,7 +57,7 @@ export default class BetCtrl extends BaseCtrl {
                 function updateUser(item, cbAsync) {
                     User.findOneAndUpdate(
                         { _id: obj.userId },
-                        { $inc: { wallet: -amount }},
+                        { $inc: { wallet: amount }},
                         function userCallback (err, userU) {
                         cbAsync(err);
                     });
