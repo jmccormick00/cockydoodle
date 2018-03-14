@@ -66,7 +66,7 @@ export class BetComponent implements OnInit {
           element.disabled = gameTime < now;
         });
 
-        for(var i = 2; i < this.games.length; i++) {
+        for(var i = 0; i < this.games.length; i++) {
           if (i < 4) {
               this.firstFour[i] = this.games[i];
           }
