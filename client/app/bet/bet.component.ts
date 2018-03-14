@@ -60,7 +60,10 @@ export class BetComponent implements OnInit {
         this.games = data;
 
         this.games.forEach(element => {
-          element.disabled = new Date(element.time) < new Date();
+          var gameTime = new Date(element.time);
+          gameTime.setHours(gameTime.getHours() + 4); // We stored the dates in UTC, add 4 hours
+          var now = new Date();
+          element.disabled = gameTime < now;
         });
 
         for(var i = 0; i < this.games.length; i++) {
