@@ -34,8 +34,6 @@ export default class BetCtrl extends BaseCtrl {
                 game: 0,
                 _id: 0,
                 popularity: 0,
-                homePot: 0,
-                awayPot: 0,
                 time: 0,
                 location: 0,
                 __v: 0
@@ -43,9 +41,15 @@ export default class BetCtrl extends BaseCtrl {
         ], function positionsCB (err, docs) {
             if (err) { return console.error(err); }
             docs.forEach(element => {
-                const winner = element.homeScore > element.awayScore;
-                const betLean = element.homeTotal > element.awayTotal;
                 if (!element.status) { // The game is closed out
+                    const winner = element.homeScore > element.awayScore;
+                    const betLean = element.homeTotal > element.awayTotal;
+                    element.payout = 0;
+                    if (winner) { // home won
+                        element.payout = Math.round(element.awayPot * (element.homeTotal / element.homePot) + element.homeTotal);
+                    } else { // away won
+                        element.payout = Math.round(element.homePot * (element.awayTotal / element.awayPot) + element.awayTotal);
+                    }
                     if ((winner && betLean) || (!winner && !betLean)) {
                         element.win = 1;
                     } else {
@@ -53,7 +57,10 @@ export default class BetCtrl extends BaseCtrl {
                     }
                 } else {
                     element.win = 0;
+                    element.payout = 0;
                 }
+                delete element.awayPot;
+                delete element.homePot;
             });
             res.status(200).json(docs);
           });

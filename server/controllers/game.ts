@@ -96,6 +96,12 @@ export default class GameCtrl extends BaseCtrl {
       let betLean = false; // this will determine which way the user bet, put more on home or away. 1 home, 0 away
       result.userTotals.forEach(element => {
         payout = 0;
+        if (potTotals.awayTotal === 0) {  // prevent any division by zero
+          potTotals.awayTotal = 0.000001;
+        }
+        if (potTotals.homeTotal === 0) { // Prevent any divions by zero
+          potTotals.homeTotal = 0.000001;
+        }
         betLean = element.homeTotal > element.awayTotal; // 1 home, 0 away
         if (winner) { // home won
           payout = potTotals.awayTotal * (element.homeTotal / potTotals.homeTotal) + element.homeTotal;
