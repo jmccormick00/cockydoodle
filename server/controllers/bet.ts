@@ -45,8 +45,12 @@ export default class BetCtrl extends BaseCtrl {
             docs.forEach(element => {
                 const winner = element.homeScore > element.awayScore;
                 const betLean = element.homeTotal > element.awayTotal;
-                if ((winner && betLean) || (!winner && !betLean)) {
-                    element.win = 1;
+                if (!element.status) { // The game is closed out
+                    if ((winner && betLean) || (!winner && !betLean)) {
+                        element.win = 1;
+                    } else {
+                        element.win = 0;
+                    }
                 } else {
                     element.win = 0;
                 }
