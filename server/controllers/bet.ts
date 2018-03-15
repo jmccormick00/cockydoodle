@@ -21,14 +21,36 @@ export default class BetCtrl extends BaseCtrl {
                 homeTotal: { $sum: '$homeAmount' },
                 awayTotal: { $sum: '$awayAmount' }
             }},
-            { $project: { // Format the output
+            { $lookup: { // join the games collection on the _id
+                from: 'games',
+                localField: '_id',
+                foreignField: '_id',
+                as: 'game'
+            }},
+            { $replaceRoot: { // merge the game data into the root object
+                newRoot: { $mergeObjects: [ { $arrayElemAt: [ '$game', 0 ] }, '$$ROOT' ] } }
+            },
+            { $project: { // format the final output
+                game: 0,
                 _id: 0,
-                gameId: '$_id',
-                awayTotal: 1,
-                homeTotal: 1
+                popularity: 0,
+                homePot: 0,
+                awayPot: 0,
+                time: 0,
+                location: 0,
+                __v: 0
             }}
         ], function positionsCB (err, docs) {
             if (err) { return console.error(err); }
+            docs.forEach(element => {
+                const winner = element.homeScore > element.awayScore;
+                const betLean = element.homeTotal > element.awayTotal;
+                if ((winner && betLean) || (!winner && !betLean)) {
+                    element.win = 1;
+                } else {
+                    element.win = 0;
+                }
+            });
             res.status(200).json(docs);
           });
     }
