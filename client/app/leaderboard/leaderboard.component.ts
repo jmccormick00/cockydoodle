@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-
+import { NavComponent } from '../nav/nav.component';
+import { HomeComponent } from '../home/home.component';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
-  styleUrls: ['./leaderboard.component.css']
+  styleUrls: ['./leaderboard.component.css'],
+  providers: [ HomeComponent ]
 })
 export class LeaderboardComponent implements OnInit {
 

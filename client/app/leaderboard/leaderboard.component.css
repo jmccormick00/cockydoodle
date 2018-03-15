@@ -3,20 +3,21 @@
     font-weight:bold;
     color:rgb(92,29,25);
     margin:auto;
-    width:95px;
+    width:145px;
     text-align:center;
     padding-top:5px;
 }
 
 .leaderboard {
     border:2px solid rgb(92,29,25);
-    width:200px;
-    float:left;
-    margin:20px;
+    width:300px;
+    margin:auto;    
+    margin-top:30px;
 }
 
 .leaderboard-head {
     color:white;
+    text-align:center;
     background-color:rgb(92,29,25);
     font-family: 'Cinzel', sans-serif;
 }
@@ -28,7 +29,11 @@
 .leaderboard-detail {
     display:inline-block;
     padding-left:10px;
-    width:90px;
+    width:145px;
     text-align:center;
     padding-top:5px;
+}
+
+.sub-nav {
+    font-family: 'Cinzel', serif;
 }
