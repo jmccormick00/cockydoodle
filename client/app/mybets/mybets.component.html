@@ -49,10 +49,10 @@
         </div>
         <div class="bet-box">
           <div *ngIf="bet.homeTotal != 0" class="score">
-            {{bet.homeTotal}} on {{bet.homeTeam}}
+            {{bet.homeTotal}} on {{substr(bet.homeTeam)}}
           </div>
           <div *ngIf="bet.awayTotal != 0" class="score">
-            {{bet.awayTotal}} on {{bet.awayTeam}}
+            {{bet.awayTotal}} on {{substr(bet.awayTeam)}}
           </div>
         </div>
         <div class="bet-box2">
