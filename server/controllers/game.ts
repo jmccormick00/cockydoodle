@@ -16,9 +16,9 @@ export default class GameCtrl extends BaseCtrl {
       const dateToShow = new Date();
       // if (dateToShow.getHours() < 12) { // show previous day's games only if its before noon
       dateToShow.setDate(dateToShow.getDate() - 1);
-      dateToShow.setHours(8, 0, 0); // the games are stored in UTC, so convert by 4 hours for noon
-      console.log(dateToShow);
-      this.model.find({time: {$gte: dateToShow}}, null, {sort: 'time'}, (err, docs) => {
+      //dateToShow.setHours(8, 0, 0); // the games are stored in UTC, so convert by 4 hours for noon
+      //console.log('dateToShow: ' + dateToShow);
+      this.model.find({time: {$gt: dateToShow}}, null, {sort: 'time'}, (err, docs) => {
         if (err) { return console.error(err); }
         res.status(200).json(docs);
       });
