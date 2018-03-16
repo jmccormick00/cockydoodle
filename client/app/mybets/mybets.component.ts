@@ -41,5 +41,7 @@ export class MybetsComponent implements OnInit {
       () => this.isLoading = false
     );
   }
-
+  substr(stringz) {
+    return stringz.substring(2);
+  }
 }
