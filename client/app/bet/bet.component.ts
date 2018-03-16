@@ -8,7 +8,7 @@ import { NavComponent } from '../nav/nav.component';
   selector: 'app-bet',
   templateUrl: './bet.component.html',
   styleUrls: ['./bet.component.css'],
-  providers: [ NavComponent ]
+  providers: [NavComponent]
 })
 export class BetComponent implements OnInit {
   games: any;
@@ -25,7 +25,7 @@ export class BetComponent implements OnInit {
   homeOrAway = new FormControl('', [
     Validators.required
   ]);
-  firstFour:any;
+  firstFour: any;
   firstRound: any;
   tooMuch: any;
   enterAmount: any;
@@ -66,13 +66,8 @@ export class BetComponent implements OnInit {
           element.disabled = gameTime < now;
         });
 
-        for(var i = 0; i < this.games.length; i++) {
-          if (i < 4) {
-              this.firstFour[i] = this.games[i];
-          }
-          if (i >= 4) {
-            this.firstRound[i - 4] = this.games[i];
-          }
+        for (var i = 0; i < this.games.length; i++) {
+          this.firstRound[i - 4] = this.games[i];
         }
       },
       error => console.log(error),
@@ -91,7 +86,7 @@ export class BetComponent implements OnInit {
     var time = "";
     var datez = new Date(date);
     datez.setHours(datez.getHours() + 4);
-    if(datez.getHours() > 12) {
+    if (datez.getHours() > 12) {
       datez.setHours(datez.getHours() - 12);
     }
     time += datez.getHours();
@@ -102,12 +97,12 @@ export class BetComponent implements OnInit {
 
   makeBet(betform, gameId) {
     betform.value.amount = Math.floor(betform.value.amount);
-    if(betform.value.amount == "" || betform.value.amount <= 0) {
+    if (betform.value.amount == "" || betform.value.amount <= 0) {
       this.erroredGame = gameId;
       this.enterAmount = true;
       this.tooMuch = false;
       this.pickATeam = false;
-    } else if(betform.value.homeOrAway == "") {
+    } else if (betform.value.homeOrAway == "") {
       this.erroredGame = gameId;
       this.pickATeam = true;
       this.tooMuch = false;
