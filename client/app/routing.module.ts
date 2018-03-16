@@ -14,6 +14,7 @@ import { RulesComponent } from './rules/rules.component';
 import { FullRulesComponent } from './full-rules/full-rules.component';
 import { BetComponent } from './bet/bet.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { MybetsComponent } from './mybets/mybets.component';
 
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'full-rules', component: FullRulesComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'rules', component: RulesComponent },
-  { path: 'bets', component: BetComponent},
+  { path: 'mybets', component: MybetsComponent},
   { path: 'leaderboard', component: LeaderboardComponent},
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardLogin] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardAdmin] },

@@ -27,23 +27,23 @@ export class RegisterComponent implements OnInit {
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(100),
+    Validators.maxLength(40),
     Validators.pattern(this.emailReg)
   ]);
   referralEmail = new FormControl('', [
     Validators.minLength(3),
-    Validators.maxLength(100),
+    Validators.maxLength(40),
     Validators.pattern(this.emailReg)
   ]);
   name = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(50)
+    Validators.maxLength(30)
   ]);
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(50)
+    Validators.maxLength(30)
   ]);
   country = new FormControl('', [
     Validators.required,

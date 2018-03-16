@@ -26,6 +26,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { BetComponent } from './bet/bet.component';
 import { TokenInterceptor } from './token.interceptor';
+import { MybetsComponent } from './mybets/mybets.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TokenInterceptor } from './token.interceptor';
     RulesComponent,
     FullRulesComponent,
     LeaderboardComponent,
-    BetComponent
+    BetComponent,
+    MybetsComponent
   ],
   imports: [
     RoutingModule,

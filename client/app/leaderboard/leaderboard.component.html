@@ -2,25 +2,30 @@
 <div class="sub-nav">
     <div class="sub-item">
         <a routerLink="/">
-            College Basketball Challenge
-          </a>
-      </div>
-    <div class="sub-item">
-      <a href="https://reddit.com/r/cockydoodle">
-        Discussion
-      </a>
+            March Madness Challenge
+        </a>
     </div>
     <div class="sub-item">
-      <a routerLink="/rules">
-        Rules
-      </a>
+        <a href="https://reddit.com/r/cockydoodle">
+            Discussion
+        </a>
+    </div>
+    <div class="sub-item">
+        <a routerLink="/rules">
+            Rules
+        </a>
     </div>
     <div class="sub-item active">
         <a routerLink="/leaderboard">
-          Leaderboard
+            Leaderboard
         </a>
-      </div>
-  </div>
+    </div>
+    <div class="sub-item">
+        <a routerLink="/mybets">
+            My Bets
+        </a>
+    </div>
+</div>
 <div class="leaderboard" *ngIf="!isLoading">
     <div class="leaderboard-head">Overall Leaderboard</div>
     <div class="leaderboard-title">Player</div>
@@ -34,3 +39,5 @@
 
 
 </div>
+
+<app-account *ngIf="home.showAccount"></app-account>

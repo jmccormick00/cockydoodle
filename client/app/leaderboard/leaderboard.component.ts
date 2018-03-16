@@ -12,7 +12,7 @@ export class LeaderboardComponent implements OnInit {
 
   leaderboard: any;
   isLoading = true;
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService, public home: HomeComponent) { }
 
   ngOnInit() {
     this.loadLeaderboard();
