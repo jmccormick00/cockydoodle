@@ -27,19 +27,31 @@ export default class BetCtrl extends BaseCtrl {
                 foreignField: '_id',
                 as: 'game'
             }},
-            { $replaceRoot: { // merge the game data into the root object
-                newRoot: { $mergeObjects: [ { $arrayElemAt: [ '$game', 0 ] }, '$$ROOT' ] } }
-            },
-            { $project: { // format the final output
+            //{ $replaceRoot: { // merge the game data into the root object ** NOT SUPPORTED IN MLAB **
+            //    newRoot: { $mergeObjects: [ { $arrayElemAt: [ '$game', 0 ] }, '$$ROOT' ] } }
+            //},
+            /* { $project: { // format the final output
                 game: 0,
                 _id: 0,
                 popularity: 0,
                 time: 0,
                 location: 0,
                 __v: 0
-            }}
+            }} */
         ], function positionsCB (err, docs) {
             if (err) { return console.error(err); }
+            // bring the game data into the main object - Replace the $mergeObjects function from above
+            docs.forEach(element => {
+                element.homeScore = element.game[0].homeScore;
+                element.awayScore = element.game[0].awayScore;
+                element.awayPot = element.game[0].awayPot;
+                element.homePot = element.game[0].homePot;
+                element.homeTeam = element.game[0].homeTeam;
+                element.awayTeam = element.game[0].awayTeam;
+                element.status = element.game[0].status;
+                delete element.game;
+                delete element._id;
+            });
             docs.forEach(element => {
                 if (!element.status) { // The game is closed out
                     const winner = element.homeScore > element.awayScore;
