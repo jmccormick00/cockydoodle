@@ -49,10 +49,13 @@ export default class BetCtrl extends BaseCtrl {
                 element.homeTeam = element.game[0].homeTeam;
                 element.awayTeam = element.game[0].awayTeam;
                 element.status = element.game[0].status;
+                element.time = element.game[0].time;
                 delete element.game;
                 delete element._id;
             });
+            docs.sort(function (a, b) { return a.time - b.time; });
             docs.forEach(element => {
+                // console.log(element.time);
                 if (!element.status) { // The game is closed out
                     const winner = element.homeScore > element.awayScore;
                     const betLean = element.homeTotal > element.awayTotal;
@@ -73,6 +76,7 @@ export default class BetCtrl extends BaseCtrl {
                 }
                 delete element.awayPot;
                 delete element.homePot;
+                delete element.time;
             });
             res.status(200).json(docs);
           });
