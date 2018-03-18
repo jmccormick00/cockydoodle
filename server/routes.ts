@@ -28,7 +28,7 @@ export default function setRoutes(app, passport) {
   // Users
   router.post('/login', userCtrl.login);
   router.get('/users/count', userCtrl.count);
-  router.post('/user', userCtrl.insert);
+  // router.post('/user', userCtrl.insert);
   router.get('/user/:id', passport.authenticate('jwt', { session: false}), userCtrl.get);
 
   // Leaderboard
