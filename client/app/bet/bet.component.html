@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading">
   <div class="day-title">
-    March 15-16, 2018 – March Madness First Round
+    March 17-18, 2018 – March Madness Second Round
   </div>
   <form class="betForm" *ngFor="let game of firstRound" [formGroup]="betForm" (ngSubmit)="makeBet(betForm, game._id)">
     <div class="bet">
